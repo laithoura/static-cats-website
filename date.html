@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Date Time</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="https://laithoura.github.io/learn-mkdocs/img/favicon.ico">
+    </head>
+    <body>
+        <div>
+            <h3>Calculate Date & Time</h3>
+        </div>
+        <fieldset>
+            <legend>Date:</legend>
+            <div>
+                <label for="startDate">
+                    Start:
+                </label>
+                <input type="date" name="startDate" id="startDate"> 
+                <input type="time" name="startTime" id="startTime"> 
+                (<span id="startTimeSpan">00:00</span>)
+            </div>
+            <br>
+            <div>
+                <label for="endDate">
+                    End :
+                </label>
+                <input type="date" name="endDate" id="endDate"> 
+                <input type="time" name="endTime" id="endTime"> 
+                (<span id="endTimeSpan">00:00</span>)
+            </div>
+            <div id="error-message" style="display: none; color: rgb(172, 14, 14);">
+                <br>
+                Oops! Cannot calculate invalid dates. Please verify your Start & End date.
+            </div>
+            <br>
+            <div>
+                Year: <b id="year">0</b>
+            </div>
+            <div>
+                Month: <b id="month">0</b>
+            </div>
+            <div>
+                Day: <b id="day">0</b>
+            </div>
+            <div>
+                Hour: <b id="hour">0</b>
+            </div>
+            <div>
+                Minute: <b id="minute">0</b>
+            </div>
+            <div>
+                Second: <b id="second">0</b>
+            </div>
+            <div>
+                Millisecond: <b id="millisecond">0</b>
+            </div>
+            <br>
+            <div>
+                <b>Total Day</b> : <span class="duration" id="duration">0 day</span>
+            </div>
+        </fieldset>
+        
+    </body>
+
+    <script>
+        "use strict";
+
+        let errorMessage = document.getElementById('error-message');
+        let startDateInput = document.getElementById('startDate');
+        let endDateInput = document.getElementById('endDate');
+        let durationSpan = document.getElementById('duration');
+        let startTimeInput = document.getElementById('startTime');
+        let endTimeInput = document.getElementById('endTime');
+        let startTimeDisplay = document.getElementById('startTimeSpan');
+        let endTimeDisplay = document.getElementById('endTimeSpan');
+
+        let yearTd = document.getElementById('year');
+        let monthTd = document.getElementById('month');
+        let dayTd = document.getElementById('day');
+        let hourTd = document.getElementById('hour');
+        let minuteTd = document.getElementById('minute');
+        let secondTd = document.getElementById('second');
+        let millisecondTd = document.getElementById('millisecond');
+        
+        //set current time to startTimeInput
+        startTimeInput.value = '00:00';
+        startTimeDisplay.innerHTML = '00:00';
+
+        //set current date time to endDateInput
+        const now = new Date();
+        console.log('now : ', now);
+        now.setDate(now.getDate() + 1);
+        console.log('+ 1 day : ', now);
+        endDateInput.valueAsDate = now;
+        console.log('endDateInput.value : ', endDateInput.value)
+        let defaultEndTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        endTimeInput.value = defaultEndTime;
+        endTimeDisplay.innerHTML = defaultEndTime;
+
+        startTimeInput.addEventListener('change', (event) => {            
+            console.log('change -> startTime : ', startTimeInput.value);
+            startTimeDisplay.innerHTML = startTimeInput.value;
+            calculateDuration();
+        });
+
+        endTimeInput.addEventListener('change', (event) => {
+            console.log('change -> endTime : ', endTimeInput.value);
+            endTimeDisplay.innerHTML = endTimeInput.value;
+            calculateDuration();
+        });
+
+        startDateInput.addEventListener('change', (event) => {
+            calculateDuration();
+            const start = startDateInput.value;
+            endDateInput.setAttribute("min", start ? start : undefined);  
+        });
+
+        endDateInput.addEventListener('change', (event) => {
+            calculateDuration();
+            // const end = endDateInput.value;
+            // startDateInput.setAttribute("max", end ? end : undefined); 
+        });
+
+        function clearValues() {
+            yearTd.innerHTML = '0';
+            monthTd.innerHTML = '0';
+            dayTd.innerHTML = '0';
+            hourTd.innerHTML = '0';
+            minuteTd.innerHTML = '0';
+            secondTd.innerHTML = '0';
+            millisecondTd.innerHTML = '0';
+            durationSpan.textContent = '0';
+        }
+        
+        function calculateDuration() {
+            const start = startDateInput.value;
+            const startTime = startTimeInput.value;
+            console.log('calculateDuration -> start: ', start);
+            if (!start) {
+                clearValues();
+                return;
+            }
+            
+            let end = endDateInput.value;
+            const endTime = endTimeInput.value;
+            console.log('calculateDuration -> end: ', end);
+            if (!end) {
+                clearValues();
+                return;
+            }
+            
+            const startDateValue = start.replace(/-/g, '/') + (startTime ? ' ' + startTime : '');
+            console.log('startDateValue -> ', startDateValue);
+            let startDate = new Date(startDateValue);
+            console.log('startDate ->', startDate);
+            
+            const endDateValue = end.replace(/-/g, '/') + (endTime ? ' ' + endTime : '');
+            console.log('endDateValue -> ', endDateValue);
+            const endDate = new Date(endDateValue);
+            console.log('endDate -> ', endDate);
+
+            const DAYS_PER_YEAR = 365;
+            const DAYS_PER_MONTH = 30;
+            const HOURS_PER_DAY = 24;
+            
+            const MILLISECOND_PER_SECOND = 1000;
+            const MILLISECOND_PER_MINUTE = MILLISECOND_PER_SECOND * 60; 
+            const MILLISECOND_PER_HOUR = MILLISECOND_PER_MINUTE * 60;
+            const MILLISECOND_PER_DAY = MILLISECOND_PER_HOUR * HOURS_PER_DAY;
+            const MILLISECOND_PER_MONTH = MILLISECOND_PER_DAY * DAYS_PER_MONTH;
+            const MILLISECOND_PER_YEAR = MILLISECOND_PER_DAY * DAYS_PER_YEAR;
+            let diffTimes = Math.abs(startDate - endDate);
+            let diffDays = Math.floor(diffTimes / MILLISECOND_PER_DAY);
+
+            console.log('diffTimes -> ', diffTimes);
+            console.log('diffDays -> ', diffDays);
+            if (isNaN(diffDays) || isNaN(diffTimes)) {
+                diffDays = 0;
+                diffTimes = 0;
+                errorMessage.style.display = "block";
+            } else {
+                errorMessage.style.display = "none";
+            }
+
+            // year
+            let year = 0;
+            while(diffTimes >= MILLISECOND_PER_YEAR) {
+                year++;
+                diffTimes -= MILLISECOND_PER_YEAR;
+            }
+            yearTd.innerHTML = year;
+
+
+            //month
+            let month = 0;
+            while(diffTimes >= MILLISECOND_PER_MONTH) {
+                month++;
+                diffTimes -= MILLISECOND_PER_MONTH;
+            }
+            monthTd.innerHTML = month;
+
+            // day
+            let day = 0;
+            while(diffTimes >= MILLISECOND_PER_DAY) {
+                day++;
+                diffTimes -= MILLISECOND_PER_DAY;
+            }
+            dayTd.innerHTML = day;
+
+
+            // hour
+            let hour = 0;
+            while (diffTimes >= MILLISECOND_PER_HOUR) {
+                hour++;
+                diffTimes -= MILLISECOND_PER_HOUR;
+            }
+            hourTd.innerHTML = hour;
+
+
+            // minute
+            let minute = 0;
+            while(diffTimes >= MILLISECOND_PER_MINUTE) {
+                minute++;
+                diffTimes -= MILLISECOND_PER_MINUTE;
+            }
+            minuteTd.innerHTML = minute;
+            
+
+            // second
+            let second = 0;
+            while(diffTimes >= MILLISECOND_PER_SECOND) {
+                second++;
+                diffTimes -= MILLISECOND_PER_SECOND;
+            }
+            secondTd.innerHTML = second;
+
+            // millisecond
+            millisecondTd.innerHTML = diffTimes;
+
+            // total days
+            durationSpan.textContent = diffDays + (diffDays > 1 ? ' days' : ' day');
+        }
+    </script>
+</html>

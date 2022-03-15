@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Cat Home</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="https://laithoura.github.io/learn-mkdocs/img/favicon.ico">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+body img {
+    max-width: 100%;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 80px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Active/current link */
+.navbar a.active {
+  background-color: #666;
+  color: white;
+}
+
+/* Column container */
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+  max-width: 100%;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+  max-width: 100%;
+}
+
+/* Fake image, just for this example */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Welcome to The Useless Website</h1>
+  <p>You have wasted your time to visit this useless website.</p>
+</div>
+
+<div class="navbar">
+  <a href="#" class="active">Home</a>
+  <a target="_blank" href="date.html">Date & Time</a>
+  <a target="_blank" href="https://www.youtube.com/watch?v=otM1ny1aSI0">House</a>
+  <a target="_blank" href="https://www.youtube.com/watch?v=RGi8BiOHHkg">Club</a>
+  <a target="_blank"  href="https://www.youtube.com/watch?v=3TWYb34cufc&ab_channel=Kh%C3%A1nhBeatMusic"  class="right">Resort</a>
+</div>
+
+<div class="row">
+  <div class="side">
+    <h2>About Cat</h2>
+    <img  height="200" src="https://i.ytimg.com/vi/1Ne1hqOXKKI/maxresdefault.jpg" alt="">
+    <p>Some cat owners prefer to feed their cats wet food. Others prefer dry kibble. Trying to decide between wet vs. dry cat food? Find out what our experts recommend when it comes to feeding your cat.</p>
+    <h3>Educational Background</h3>
+    <p>If you aren’t sure how much wet food you should feed your cat, Purina’s expert nutritionists can help. Plus, they offer guidance on food safety and provide serving ideas your cat will love.</p>
+    <img height="200" src="https://static.scientificamerican.com/sciam/cache/file/92E141F8-36E4-4331-BB2EE42AC8674DD3_source.jpg" alt="">
+    <br>
+    <img height="200" src="https://scitechdaily.com/images/Cat-COVID-19-Mask.jpg" alt="">
+    <br>
+    <img height="200" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb9-5uPNOswg3XN-9HyVcqxo6NS8XeQ27ZPA&usqp=CAU" alt="">
+  </div>
+  <div class="main">
+    <h2>Why does the cat stare at you?</h2>
+    <h5>Published: Dec 12, 2020</h5>
+    <img  height="200" src="https://www.nedlands.wa.gov.au/sites/default/files/cat4.jpeg" alt="">
+    <p>When it comes to cat food, there are so many options. Loving cat owners must choose from a variety of different flavors, decide between wet and dry, among many other considerations.</p>
+    <br>
+    <h2>How to make cat happy?</h2>
+    <h5>Published: Sep 12, 2020</h5>
+    <img  height="200" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRJgUnizcKoLtrGY-5fhpNLBSI0Cy6N69K2A&usqp=CAU" alt="">
+    <p>You’re probably familiar with the wet food in cans, but you may also find it in pouches. Both “come in small sizes, making it easy to provide a variety of different flavors, and for some, smaller sizes may make portion control easier,” says Purina Veterinary Nutritionist Dr. Dorothy Laflamme.</p>
+    <br>
+    <p>Wet cat food has at least 65 percent or more moisture content. As a result, “wet food should not be left out for more than 30 to 60 minutes at a time to prevent bacterial growth,” according to Laflamme.</p>
+    <br>
+    <p>Wet cat food offers many benefits, though, including:</p>
+    <ul>
+        <li>Textures and ingredients cats love</li>
+        <li>Easier for cats to chew</li>
+        <li>More variety in diet</li>
+        <li>Helps increase total water intake</li>
+        <li>Although feeding wet food to your cat seems special or indulgent, it’s more than a snack or treat. Wet cat food is 100 percent complete and balanced and can be an essential part of any cat’s diet.</li>
+    </ul>
+    </p>
+  </div>
+</div>
+
+<div class="footer">
+  <h5>CopyRight@Mr.Cat2020</h5>
+  <a target="_blank" href="https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_example_website">Content Source</a>
+</div>
+
+</body>
+</html>
